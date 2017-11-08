@@ -1,10 +1,6 @@
 {
-  "name": "starter-project-dapp",
+  "name": "contracts-starter-project",
   "version": "0.1.0",
-  "author": {
-    "email": "cwhinfrey@gmail.com",
-    "name": "Chris Whinfrey"
-  },
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
@@ -14,8 +10,10 @@
   ],
   "dependencies": {
     "ethjs-abi": "^0.2.0",
+    "moment": "^2.18.1",
     "truffle-blockchain-utils": "^0.0.3",
-    "truffle-ext": "^0.1.7"
+    "truffle-hdwallet-provider": "^0.0.3",
+    "zeppelin-solidity": "^1.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -25,17 +23,19 @@
     "babel-preset-stage-0": "^6.24.1",
     "cross-env": "^5.0.4",
     "jest-cli": "^20.0.4",
+    "lk-test-helpers": "^0.1.3",
     "snazzy": "^7.0.0",
     "standard": "^10.0.3",
-    "truffle-artifactor": "1.0.2"
+    "truffle-artifactor": "1.0.2",
+    "truffle-contract": "^3.0.0",
+    "truffle-ext": "^0.1.8"
   },
   "scripts": {
-    "build": "yarn cleanup && yarn compile && yarn build:artifacts && yarn build:commonjs",
-    "build:artifacts": "node ./scripts/buildArtifacts.js",
-    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
-    "cleanup": "rm -rf build/ && mkdir build",
-    "compile": "truffle compile --all",
-    "deploy": "yarn cleanup && truffle migrate --reset && yarn build:artifacts && yarn build:commonjs",
+    "build": "node scripts/build.js",
+    "cleanup": "rm -rf build/ && mkdir build && rm -rf lib/ && mkdir lib",
+    "compile": "yarn cleanup && truffle compile --all && yarn build",
+    "deploy": "yarn cleanup && truffle migrate --reset && yarn build",
+    "deploy-rinkeby": "yarn cleanup && truffle migrate --reset --network rinkeby && yarn build",
     "test": "yarn build && scripts/test.sh",
     "testrpc": "scripts/runTestrpc.sh",
     "run-jest": "jest",
@@ -46,6 +46,7 @@
       "node_modules",
       "src",
       "test"
-    ]
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>/test/helpers/setup.js"
   }
 }

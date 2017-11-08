@@ -1,33 +1,47 @@
-# Contracts Starter Project
+# Smart Contract Starter
 
-Starter project for a dApp's contract code. Build, deploy, and test Solidity contracts.
+[Description]
 
-### Build
+### Setup
+
+```
+$ yarn install
+```
+
+### Compile
 Recompile contracts and build artifacts.
 ```
-$ yarn build
-```
-
-### Build Artifacts
-Rebuilds truffle artifacts found at `./build/artifacts` from your contracts in `.build/contracts`.
-```
-$ yarn build-artifacts
+$ yarn compile
 ```
 
 ### Deploy
-Deploy contracts to RPC provider at port `8545`.
+Deploy contracts to RPC provider at port `8546`.
 ```
-$ yarn redeploy
-```
-
-### Recompile
-Recompile your contracts without rebuilding artifacts
-```
-$ yarn recompile
+$ yarn deploy
 ```
 
 ### Test
-Restart `testrpc` and run `truffle test`.
+Run `yarn compile` before first test run, and after any changes to the `.sol` files
 ```
 $ yarn test
 ```
+
+### Deployment Setup
+
+Add `secrets.json` to the project root
+
+```
+// secrets.json
+{
+  "mnemonic": "<some mnemonic>",
+  "infura_apikey": "<your infura key>"
+}
+```
+
+Go to https://iancoleman.github.io/bip39/, click "Generate". Add `BIP39 Mnemonic` to `"mnemonic"` value in `secrets.json`
+
+Add address from the BIP39 page to MetaMask. Send it some rinkeby Ether, or get it from the faucet on https://www.rinkeby.io
+
+Go to https://infura.io/register.html to register for Infura. Paste your API key into `"infura_apikey"` value in `secrets.json`
+
+`yarn deploy-rinkeby` to deploy to rinkeby
