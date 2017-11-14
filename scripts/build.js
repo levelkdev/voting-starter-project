@@ -1,29 +1,28 @@
-var fs = require('fs')
+module.exports = {
+  networks: {
+    development: {
+      host: 'localhost',
+      port: 8546,
+      network_id: '*' // Match any network id
+    },
+    rinkeby: getRinkebyConfig()
+  }
+}
 
-var contractsPath = 'build/contracts'
-var bundleFilePath = 'lib/index.js'
-
-fs.readdir(contractsPath, function (err, items) {
-  if (err) {
-    return console.log(err)
+function getRinkebyConfig () {
+  var HDWalletProvider = require('truffle-hdwallet-provider')
+  var secrets = {}
+  try {
+    secrets = require('./secrets.json')
+  } catch (err) {
+    console.log('could not find ./secrets.json')
   }
 
-  var bundle = 'module.exports = {'
+  var rinkebyProvider = new HDWalletProvider(secrets.mnemonic, 'https://rinkeby.infura.io/' + secrets.infura_apikey)
 
-  for (var i = 0; i < items.length; i++) {
-    var fileName = items[i]
-    var contractName = fileName.substr(0, fileName.length - 5)
-    var data = fs.readFileSync(`${contractsPath}/${fileName}`).toString()
-    bundle += `"${contractName}": ${data},`
+  return {
+    network_id: 4,
+    provider: rinkebyProvider,
+    from: rinkebyProvider.getAddress()
   }
-
-  bundle = bundle.substr(0, bundle.length - 1)
-
-  bundle += '}'
-
-  fs.writeFile(bundleFilePath, bundle, function (err) {
-    if (err) {
-      return console.log(err)
-    }
-  })
-})
+}
