@@ -1,8 +1,9 @@
-var ConvertLib = artifacts.require("./ConvertLib.sol");
-var MetaCoin = artifacts.require("./MetaCoin.sol");
+/* global artifacts */
 
-module.exports = function(deployer) {
-  deployer.deploy(ConvertLib);
-  deployer.link(ConvertLib, MetaCoin);
-  deployer.deploy(MetaCoin);
-};
+const ShrimpCoin = artifacts.require('ShrimpCoin')
+
+module.exports = function (deployer) {
+  deployer.deploy(
+    ShrimpCoin
+  )
+}

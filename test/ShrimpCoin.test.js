@@ -1,6 +1,9 @@
-/* global describe test expect beforeEach */
+/* global describe it beforeEach artifacts */
 
-import { ShrimpCoin } from 'helpers/contracts'
+import { expect } from 'chai'
+
+const ShrimpCoin = artifacts.require('ShrimpCoin')
+
 /* import moment from 'moment'
 import lkTestHelpers from 'lk-test-helpers'
 import { web3 } from 'helpers/w3'
@@ -14,8 +17,8 @@ describe('ShrimpCoin', () => {
   beforeEach(async () => {
     shrmp = await newShrimpCoin()
   })
-  test('should have a shrimpy symbol', async () => {
-    expect(await shrmp.SYMBOL.call()).toBe('SHRMP')
+  it('should have a shrimpy symbol', async () => {
+    expect(await shrmp.SYMBOL.call()).to.equal('SHRMP')
   })
 })
 

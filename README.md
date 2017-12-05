@@ -4,27 +4,39 @@
 
 ### Setup
 
-```
-$ yarn install
-```
+Make sure you have the following installed globally:
+
+node 8
+
+TestRPC 6: `npm install -g ethereumjs-testrpc`
+
+Then run `yarn install`
 
 ### Compile
+
 Recompile contracts and build artifacts.
+
 ```
 $ yarn compile
 ```
 
 ### Deploy
+
 Deploy contracts to RPC provider at port `8546`.
+
 ```
 $ yarn deploy
 ```
 
 ### Test
+
 Run `yarn compile` before first test run, and after any changes to the `.sol` files
+
 ```
 $ yarn test
 ```
+
+Run `yarn test:coverage` to run with coverage reporting
 
 ### Deployment Setup
 
