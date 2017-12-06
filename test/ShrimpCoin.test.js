@@ -18,7 +18,7 @@ describe('ShrimpCoin', () => {
     shrmp = await newShrimpCoin()
   })
   it('should have a shrimpy symbol', async () => {
-    expect(await shrmp.SYMBOL.call()).to.equal('SHRMP')
+    expect(await shrmp.symbol.call()).to.equal('SHRMP')
   })
 })
 
