@@ -12,6 +12,8 @@ TestRPC 6: `npm install -g ethereumjs-testrpc`
 
 Then run `npm install`
 
+`chmod +x ./scripts` to grant execute permissions on the scripts directory
+
 ### Compile
 
 Recompile contracts and build artifacts.
@@ -25,6 +27,7 @@ $ npm run compile
 Deploy contracts to RPC provider at port `8546`.
 
 ```
+$ npm run testrpc
 $ npm run deploy
 ```
 
