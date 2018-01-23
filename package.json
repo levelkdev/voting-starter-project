@@ -35,12 +35,12 @@
   "scripts": {
     "build": "node scripts/build.js",
     "cleanup": "rm -rf build/ && mkdir build && rm -rf lib/ && mkdir lib",
-    "compile": "yarn cleanup && truffle compile --all && yarn build",
-    "deploy": "yarn cleanup && truffle migrate --reset && yarn build",
-    "deploy-rinkeby": "yarn cleanup && truffle migrate --reset --network rinkeby && yarn build",
-    "test": "yarn build && scripts/test.sh",
+    "compile": "npm run cleanup && truffle compile --all && npm run build",
+    "deploy": "npm run cleanup && truffle migrate --reset && npm run build",
+    "deploy-rinkeby": "npm run cleanup && truffle migrate --reset --network rinkeby && npm run build",
+    "test": "npm run build && scripts/test.sh",
     "test:truffle": "truffle test",
-    "test:coverage": "yarn build && yarn solidity-coverage",
+    "test:coverage": "npm run build && npm run solidity-coverage",
     "testrpc": "scripts/runTestrpc.sh",
     "lint": "standard --verbose | snazzy"
   }

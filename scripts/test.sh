@@ -25,5 +25,5 @@ if [ ! $trpc_running ]; then
   > /dev/null &
   trpc_pid=$!
 fi
-yarn test:truffle
+npm run test:truffle
 kill -9 $trpc_pid
