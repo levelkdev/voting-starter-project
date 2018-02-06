@@ -22,14 +22,35 @@ describe('Voting', () => {
   })
   describe('buy()', () => {
     beforeEach(async () => {
-      // console.log(await voting.totalTokens())
-      // console.log(ethAmount)
-      // console.log(accounts[1])
-      await voting.buy( { value: ethAmount, from: accounts[1]} )
+      await voting.buy({ value: ethAmount, from: accounts[1] })
     })
 
     it('should increment the sender tokens bought', async () => {
       expect((await voting.voterInfo(accounts[1]))[1].toNumber()).to.equal(10)
+    })
+  })
+  
+  describe('voteForCandidate', () => {
+    beforeEach(async () => {
+      await voting.buy({ value: ethAmount, from: accounts[1] })
+      await voting.voteForCandidate("Mike", 4, { from: accounts[1] })
+    })
+    it('should increment the tokens for the candidate that got voted for', async () => {
+      expect((await voting.totalVotesFor("Mike")).toNumber()).to.equal(4)
+    })
+  })
+  
+  describe('voterDetails', () => {
+    beforeEach(async () => {
+      await voting.buy({ value: ethAmount, from: accounts[1] })
+      await voting.voteForCandidate("Mike", 2, { from: accounts[1] })
+      await voting.voteForCandidate("Emily", 4, { from: accounts[1] })
+    })
+    it('should return tokens used per candidate by the voter', async () => {
+      expect((await voting.voterDetails(accounts[1]))[0].toNumber()).to.equal(10)
+      expect((await voting.voterDetails(accounts[1]))[1][0].toNumber()).to.equal(2)
+      expect((await voting.voterDetails(accounts[1]))[1][1].toNumber()).to.equal(0)
+      expect((await voting.voterDetails(accounts[1]))[1][2].toNumber()).to.equal(4)
     })
   })
 })
