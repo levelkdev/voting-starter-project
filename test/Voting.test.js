@@ -22,22 +22,20 @@ describe('Voting', () => {
   })
   describe('buy()', () => {
     beforeEach(async () => {
-      voting.buy( { value: web3.toWei(ethAmount, 'ether'), from: accounts[1]} )
+      // console.log(await voting.totalTokens())
+      // console.log(ethAmount)
+      // console.log(accounts[1])
+      await voting.buy( { value: ethAmount, from: accounts[1]} )
     })
 
     it('should increment the sender tokens bought', async () => {
-      expect(voting.voterInfo[accounts[1]].tokensBought).to.equal(10)
+      expect((await voting.voterInfo(accounts[1]))[1].toNumber()).to.equal(10)
     })
-  })
-  
-  
-  it('should have a shrimpy symbol', async () => {
-    // expect(await shrmp.symbol.call()).to.equal('SHRMP')
   })
 })
 
 async function newVoting () {
-  const voting = await tryAsync(Voting.new())
+  const voting = await tryAsync(Voting.new(1000, 1, ["Mike", "Chris", "Emily"]))
   return voting
 }
 
