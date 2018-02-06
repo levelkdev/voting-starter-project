@@ -2,8 +2,10 @@ import truffleContract from 'truffle-contract'
 import truffleExt from 'truffle-ext'
 import { web3, web3Provider } from './w3'
 import ShrimpCoinJSON from '../../build/contracts/ShrimpCoin.json'
+import VotingJSON from '../../build/contracts/Voting.json'
 
 export const ShrimpCoin = getContract(ShrimpCoinJSON)
+export const Voting = getContract(VotingJSON)
 
 function getContract (contractAbi) {
   const { requireContract } = truffleExt(web3)

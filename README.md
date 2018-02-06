@@ -1,4 +1,4 @@
-# Smart Contract Starter
+# Voting Starter Project
 
 [Description]
 
