@@ -1,11 +1,5 @@
-/* global artifacts */
+var Voting = artifacts.require("./Voting.sol");
+module.exports = function(deployer) {
+  deployer.deploy(Voting, 50000, web3.toWei('0.01', 'ether'), ['Rama', 'Nick', 'Jose']);
+};
 
-const ShrimpCoin = artifacts.require('ShrimpCoin')
-const Voting = artifacts.require('Voting')
-
-module.exports = function (deployer) {
-  deployer.deploy(
-    ShrimpCoin,
-    Voting
-  )
-}
